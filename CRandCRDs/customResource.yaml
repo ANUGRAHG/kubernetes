@@ -1,0 +1,6 @@
+apiVersion: cad.com/v1
+kind: CustomConfigMap
+metadata:
+  name: another-map
+spec:
+  my-property: 'another configmap'

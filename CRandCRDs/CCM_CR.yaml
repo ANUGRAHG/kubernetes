@@ -1,0 +1,6 @@
+apiVersion: cad.com/v1
+kind: CustomConfigMap
+metadata:
+  name: my-custom-resource
+spec:
+  my-property: 'testing CRD instance'

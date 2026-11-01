@@ -1,0 +1,60 @@
+readiness prove:
+  pod lifecycle:
+    pod status:
+     - pending
+     - container creating
+     - running
+
+    pod condition:
+     - PodScheduled
+     - Initialized
+     - ContainerReady
+     - Ready
+
+readinessProve:
+  httpGet:
+    path: /api/ready
+    port: 8080
+
+readinessProve:
+  tcpSocket:
+    port: 8080
+
+readinessProve:
+  exec:
+    command:
+      - cat
+      - app/is_Ready
+
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  failureThreshold: 8
+
+liveness prove:
+---------------
+
+livenessProve:
+  httpGet:
+    path: /api/ready
+    port: 8080
+
+livenessProve:
+  tcpSocket:
+    port: 8080
+
+livenessProve:
+  exec:
+    command:
+      - cat
+      - app/is_Ready
+
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  failureThreshold: 8
+
+container logging
+
+monitoring:
+
+kubectl top node (to see performance matrx for node -- CPU and memory)
+kubectl top pod (to see perormance matrix of pod)

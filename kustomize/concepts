@@ -1,0 +1,50 @@
+kustomization.yamlfile
+Base and Overlays
+Transformers
+Patches
+
+common transformers:
+
+commonLabel - It adds a label to all Kubernetes resources
+namePrefix - It adds a common prefix to all resource
+names
+nameSuffix - It adds a common suffix to all resource
+names
+Namespace - It adds a common namespace to all resources
+commonAnnotations - It adds an annotation to all resources
+
+image transformers:
+ images
+   - name: nginx
+     newName: ubuntu
+     newtag:23.04
+
+Patches (Overlays)
+Patches or overlays provide another method to modify Kubernetes configs. It provides more specific sections to change in the configuration. There are 3 parameters we need to provide:
+
+Operation Type: add or remove or replace
+Target: Resource name which we want to modify
+Value: Value name that will either be added or replaced. For the remove operation type, there would not be any value.
+There are two ways to define the patch:
+
+JSON 6902 and
+Stragetic Merge Patching.
+
+example:
+Let's assume the following scenario.
+
+Nginx web server needs to be deployed in the dev and prod
+In dev, we need only a deployment with 2 replicas, a Nodeport service, and less memory and CPU resources.
+In prod, we need a deployment with 4 replicas, different CPU and memory limits, a rolling update strategy, and a service without NodePort.
+
+kustomize build overlays/dev
+kustomize build overlays/dev | kubectl apply -f -
+
+kubectl apply -k overlays/dev
+
+Kustomize has the functionality to generate Configmaps and Secrets.
+
+In Kustomization YAML there are two supported fields
+
+configMapGenerator and
+secretGenerator
