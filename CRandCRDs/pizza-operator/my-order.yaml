@@ -1,0 +1,9 @@
+apiVersion: restaurant.example.com/v1
+kind: PizzaOrder
+metadata:
+  name: late-night-snack
+spec:
+  size: "Large"
+  toppings:
+    - "Pepperoni"
+    - "Jalapenos"
